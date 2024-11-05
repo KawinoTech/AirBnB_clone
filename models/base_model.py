@@ -17,11 +17,23 @@ class BaseModel:
         updated_at (datetime): The timestamp of the last update to the instance.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initializes a new instance of the BaseModel class. Each instance is
         assigned a unique ID and timestamped upon creation. The updated_at
         attribute is also initialized to the creation time.
+
+        If keyword arguments are provided, they are used to set instance
+        attributes, allowing for initialization from a dictionary or JSON
+        data. The 'created_at' and 'updated_at' timestamps are parsed from
+        string format if included in kwargs.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments used to initialize
+                      instance attributes. If 'created_at' or 'updated_at'
+                      are provided, they should be in ISO format (YYYY-MM-DDTHH:MM:SS.ssssss).
+                      The '__class__' key, if present, is ignored.
 
         Attributes:
             id (str): The unique identifier generated with uuid4 for the instance.
@@ -29,9 +41,17 @@ class BaseModel:
             updated_at (datetime): Timestamp initially set to creation time
                                    and updated on each save.
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+
+        if kwargs:
+            for k, v in kwargs.items():
+                if k != '__class__':
+                    if k == 'created_at' or k == 'updated_at':
+                        v = datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, k, v)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """
