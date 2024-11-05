@@ -257,7 +257,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.obj.created_at, initial_created_at)
         self.assertNotEqual(self.obj.updated_at, initial_created_at)
 
-
     def test_create_instance_without_kwargs(self):
         """
         Test creating an instance of `BaseModel` without `kwargs`.
