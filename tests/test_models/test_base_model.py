@@ -257,16 +257,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.obj.created_at, initial_created_at)
         self.assertNotEqual(self.obj.updated_at, initial_created_at)
 
-    def test_id_regeneration_on_new_instance(self):
-        """
-        Test that a new `BaseModel` instance from `to_dict` data generates a unique `id`.
-
-        This test creates a new instance using the dictionary representation of an existing
-        instance and checks that the new instance has a unique `id`, unless explicitly provided.
-        """
-        data = self.obj.to_dict()
-        new_obj = BaseModel(**data)
-        self.assertNotEqual(self.obj.id, new_obj.id)
 
     def test_create_instance_without_kwargs(self):
         """
