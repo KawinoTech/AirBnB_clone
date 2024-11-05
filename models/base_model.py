@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -52,6 +53,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+        storage.new(self)
 
     def __str__(self):
         """
@@ -70,6 +72,7 @@ class BaseModel:
         providing an accurate timestamp of the last modification.
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """
