@@ -7,7 +7,8 @@ from models import storage
 class BaseModel:
     """
     The BaseModel class provides a foundation for other classes in the project.
-    It defines common attributes and methods that can be shared across all derived classes.
+    It defines common attributes and methods that can
+    be shared across all derived classes.
     Each instance of BaseModel is assigned a unique identifier and timestamps
     for creation and last update, along with utility methods for saving and
     converting instance data to a dictionary format.
@@ -15,7 +16,8 @@ class BaseModel:
     Attributes:
         id (str): A unique identifier for each instance, generated using uuid4.
         created_at (datetime): The timestamp when the instance was created.
-        updated_at (datetime): The timestamp of the last update to the instance.
+        updated_at (datetime): The timestamp of the
+        last update to the instance.
     """
 
     def __init__(self, *args, **kwargs):
@@ -33,11 +35,13 @@ class BaseModel:
             *args: Variable length argument list.
             **kwargs: Arbitrary keyword arguments used to initialize
                       instance attributes. If 'created_at' or 'updated_at'
-                      are provided, they should be in ISO format (YYYY-MM-DDTHH:MM:SS.ssssss).
+                      are provided, they should be in
+                      ISO format (YYYY-MM-DDTHH:MM:SS.ssssss).
                       The '__class__' key, if present, is ignored.
 
         Attributes:
-            id (str): The unique identifier generated with uuid4 for the instance.
+            id (str): The unique identifier generated
+            with uuid4 for the instance.
             created_at (datetime): Timestamp for when the instance is created.
             updated_at (datetime): Timestamp initially set to creation time
                                    and updated on each save.
@@ -61,7 +65,8 @@ class BaseModel:
         including the class name, ID, and all attribute values.
 
         Returns:
-            str: A formatted string in the format "[ClassName] (id) {attributes}".
+            str: A formatted string in the format
+            "[ClassName] (id) {attributes}".
         """
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
@@ -83,7 +88,8 @@ class BaseModel:
 
         Returns:
             dict: A dictionary containing all instance attributes, with
-                  datetime attributes in ISO format, along with a __class__ key.
+                  datetime attributes in ISO format,
+                  along with a __class__ key.
         """
         dict1 = {'__class__': type(self).__name__}
         for k, v in self.__dict__.copy().items():
