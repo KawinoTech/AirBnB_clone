@@ -1,5 +1,17 @@
 #!/usr/bin/python3
+"""
+This module defines a simple command-line interface (CLI) using the cmd module.
+The HBNBCommand class provides a basic prompt for user interaction and implements
+two commands: 'quit' and EOF (Ctrl+D) to exit the program.
+
+Commands:
+- quit: Exits the program by returning True from the do_quit method.
+- EOF (Ctrl+D): Exits the program by returning True from the do_EOF method.
+
+The prompt for the CLI is set to "(hbnb) ".
+"""
 import cmd
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "  # The prompt displayed in the CLI
