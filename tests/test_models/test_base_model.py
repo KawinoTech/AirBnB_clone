@@ -2,7 +2,9 @@
 """
 Unit tests for the BaseModel class.
 
-This module contains unit tests for the `BaseModel` class, which defines the common attributes and methods for other classes in a project.
+This module contains unit tests for the `BaseModel`
+class, which defines the common attributes and methods for
+other classes in a project.
 The tests cover various aspects of the `BaseModel` class, including:
 - Ensuring `id` uniqueness and validity
 - Verifying timestamp types and updates
@@ -12,7 +14,8 @@ Classes:
     TestBaseModel: Contains unit tests for the `BaseModel` class.
 
 Attributes:
-    sleep_time (int): Specifies the time in seconds to pause between tests that compare timestamps.
+    sleep_time (int): Specifies the time in seconds to pause
+    between tests that compare timestamps.
 """
 
 import unittest
@@ -26,11 +29,13 @@ class TestBaseModel(unittest.TestCase):
     """
     Test cases for the BaseModel class.
 
-    This class contains tests for validating the functionality of the `BaseModel` class, such as unique ID generation,
+    This class contains tests for validating the functionality
+    of the `BaseModel` class, such as unique ID generation,
     correct timestamp handling, and proper string representation format.
 
     Attributes:
-        sleep_time (int): The time to sleep in seconds, used to ensure timestamps are different for certain tests.
+        sleep_time (int): The time to sleep in seconds,
+        used to ensure timestamps are different for certain tests.
     """
 
     sleep_time = 1
@@ -45,8 +50,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that the `id` attribute is of type `str`.
 
-        This test ensures that the `id` attribute generated for each instance of `BaseModel` is a string.
-        The test creates an instance of `BaseModel` and asserts that the type of the `id` attribute is `str`.
+        This test ensures that the `id` attribute generated
+        for each instance of `BaseModel` is a string.
+        The test creates an instance of `BaseModel` and asserts
+        that the type of the `id` attribute is `str`.
         """
         obj = BaseModel()
         self.assertEqual(type(obj.id), str)
@@ -55,8 +62,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that each `BaseModel` instance has a unique `id`.
 
-        This test creates two instances of `BaseModel` and verifies that their `id` attributes are not the same.
-        This ensures that the ID generation mechanism correctly assigns a unique identifier for each instance.
+        This test creates two instances of `BaseModel` and
+        verifies that their `id` attributes are not the same.
+        This ensures that the ID generation mechanism correctly
+        assigns a unique identifier for each instance.
         """
         obj1 = BaseModel()
         self.assertNotEqual(self.obj.id, obj1.id)
@@ -65,8 +74,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that `created_at` and `updated_at` are of type `datetime`.
 
-        This test checks that the `created_at` and `updated_at` attributes for a `BaseModel` instance are
-        instances of `datetime`. This ensures that the timestamps are correctly instantiated as datetime objects.
+        This test checks that the `created_at` and `updated_at`
+        attributes for a `BaseModel` instance are
+        instances of `datetime`. This ensures that the timestamps are
+        correctly instantiated as datetime objects.
         """
         self.assertEqual(type(self.obj.created_at), datetime)
         self.assertEqual(type(self.obj.updated_at), datetime)
@@ -75,8 +86,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that `created_at` and `updated_at` are unique for each instance.
 
-        This test creates two instances of `BaseModel` with a pause in between to ensure that their `created_at`
-        and `updated_at` timestamps are different. This verifies that timestamps reflect the time of creation
+        This test creates two instances of `BaseModel` with a
+        pause in between to ensure that their `created_at`
+        and `updated_at` timestamps are different. This verifies
+        that timestamps reflect the time of creation
         accurately and are not identical.
         """
         sleep(self.sleep_time)
@@ -88,8 +101,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that calling `save` updates the `updated_at` attribute.
 
-        This test stores the initial value of `updated_at`, calls the `save` method, and verifies that
-        `updated_at` has been updated to a new value. This ensures that modifications to an instance are
+        This test stores the initial value of `updated_at`,
+        calls the `save` method, and verifies that
+        `updated_at` has been updated to a new value. This ensures
+        that modifications to an instance are
         reflected in the updated timestamp.
         """
         time = self.obj.updated_at
@@ -100,18 +115,25 @@ class TestBaseModel(unittest.TestCase):
         """
         Test the `__str__` method for correct formatting.
 
-        This test verifies that the string representation of a `BaseModel` instance matches the expected
-        format: "[ClassName] (id) {attributes}". This is important for debugging and logging purposes.
+        This test verifies that the string representation
+        of a `BaseModel` instance matches the expected
+        format: "[ClassName] (id) {attributes}". This is
+        important for debugging and logging purposes.
         """
-        expected_output = f"[{type(self.obj).__name__}] ({self.obj.id}) {self.obj.__dict__}"
+        expected_output = "[{}] ({}) {}".format(type(self.obj).__name__,
+                                                self.obj.id,
+                                                self.obj.__dict__)
         self.assertEqual(str(self.obj), expected_output)
 
     def test_str_contains_class_name_id_and_attributes(self):
         """
-        Test that `__str__` output contains the class name, id, and attributes.
+        Test that `__str__` output contains the class
+        name, id, and attributes.
 
-        This test verifies that the `__str__` output includes the class name, the `id`, and all attributes in
-        the instance's dictionary. This ensures comprehensive information is available in the string representation.
+        This test verifies that the `__str__` output includes the
+        class name, the `id`, and all attributes in
+        the instance's dictionary. This ensures comprehensive information
+        is available in the string representation.
         """
         self.assertIn(type(self.obj).__name__, str(self.obj))
         self.assertIn(self.obj.id, str(self.obj))
@@ -120,8 +142,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that the `id` attribute is in UUID format.
 
-        This test checks that the `id` attribute of a `BaseModel` instance is a valid UUID string.
-        Validating the format ensures that the generated IDs conform to expected standards for unique identifiers.
+        This test checks that the `id` attribute of a `BaseModel`
+        instance is a valid UUID string.
+        Validating the format ensures that the generated IDs conform
+        to expected standards for unique identifiers.
         """
         try:
             UUID(self.obj.id)
@@ -134,8 +158,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that `to_dict` method returns a dictionary.
 
-        This test ensures that calling the `to_dict` method on a `BaseModel` instance results in a dictionary.
-        This is important for serialization and ensuring that model data can be easily converted to a suitable format.
+        This test ensures that calling the `to_dict` method on a
+        `BaseModel` instance results in a dictionary.
+        This is important for serialization and ensuring that model
+        data can be easily converted to a suitable format.
         """
         self.assertEqual(type(self.obj.to_dict()), dict)
 
@@ -143,8 +169,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that `to_dict` method includes the class name.
 
-        This test verifies that the dictionary returned by the `to_dict` method includes a key `__class__`
-        with the value 'BaseModel'. This is crucial for identifying the type of the object when serialized.
+        This test verifies that the dictionary returned
+        by the `to_dict` method includes a key `__class__`
+        with the value 'BaseModel'. This is crucial for
+        identifying the type of the object when serialized.
         """
         dict1 = self.obj.to_dict()
         self.assertEqual(dict1['__class__'], 'BaseModel')
@@ -153,8 +181,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that timestamps are returned as strings in the dictionary.
 
-        This test ensures that the `created_at` and `updated_at` attributes in the dictionary returned by
-        `to_dict` are formatted as strings. This is important for ensuring consistency in data formats during serialization.
+        This test ensures that the `created_at` and `updated_at`
+        attributes in the dictionary returned by
+        `to_dict` are formatted as strings. This is important for
+        ensuring consistency in data formats during serialization.
         """
         dict1 = self.obj.to_dict()
         self.assertEqual(type(dict1['updated_at']), str)
@@ -165,17 +195,21 @@ class TestBaseModel(unittest.TestCase):
         Test that `to_dict` method returns a dictionary type.
 
         This test checks that the result of calling `to_dict` on a `BaseModel`
-        instance is a dictionary, ensuring that the method's output format is suitable
+        instance is a dictionary, ensuring that the
+        method's output format is suitable
         for further processing or serialization.
         """
         self.assertEqual(type(self.obj.to_dict()), dict)
 
     def test_times_tamp(self):
         """
-        Test that re-instantiating from dictionary format maintains timestamp types.
+        Test that re-instantiating from
+        dictionary format maintains timestamp types.
 
-        This test initializes a new `BaseModel` instance using data from an existing
-        instance's dictionary and confirms that `created_at` and `updated_at` remain
+        This test initializes a new `BaseModel`
+        instance using data from an existing
+        instance's dictionary and confirms
+        that `created_at` and `updated_at` remain
         as `datetime` objects, verifying that they are correctly deserialized.
         """
         new = BaseModel(self.obj.to_dict())
@@ -184,11 +218,15 @@ class TestBaseModel(unittest.TestCase):
 
     def test_kwargs_else_clause(self):
         """
-        Test that `BaseModel` can be instantiated from a dictionary with matching attributes.
+        Test that `BaseModel` can be instantiated
+        from a dictionary with matching attributes.
 
-        This test initializes a new `BaseModel` instance using the dictionary representation
-        of an existing instance and verifies that `id`, `created_at`, and `updated_at`
-        attributes match those of the original instance. This ensures that the class
+        This test initializes a new `BaseModel`
+        instance using the dictionary representation
+        of an existing instance and verifies that `id`,
+        `created_at`, and `updated_at`
+        attributes match those of the original instance.
+        This ensures that the class
         handles dictionary-based instantiation accurately.
         """
         dict1 = self.obj.to_dict()
@@ -200,9 +238,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_init_with_kwargs_only(self):
         """
-        Test that initializing `BaseModel` with `kwargs` only correctly sets attributes.
-
-        This test provides only keyword arguments to initialize a `BaseModel` instance,
+        Test that initializing `BaseModel` with
+        `kwargs` only correctly sets attributes.
+        This test provides only keyword arguments to
+        initialize a `BaseModel` instance,
         ensuring that each attribute in `kwargs` is correctly assigned.
         """
         data = {
@@ -217,7 +256,8 @@ class TestBaseModel(unittest.TestCase):
 
     def test_modify_attributes_and_save(self):
         """
-        Test that modifying an attribute and calling `save()` updates `updated_at`.
+        Test that modifying an attribute and
+        calling `save()` updates `updated_at`.
 
         This test updates an instance attribute, calls `save()`, and verifies
         that `updated_at` reflects the modification time.
@@ -232,8 +272,10 @@ class TestBaseModel(unittest.TestCase):
         """
         Test that `to_dict()` returns a dictionary with correct keys and types.
 
-        This test verifies that the dictionary produced by `to_dict()` includes all
-        expected attributes and that the format of `created_at` and `updated_at`
+        This test verifies that the dictionary produced
+        by `to_dict()` includes all
+        expected attributes and that the format of
+        `created_at` and `updated_at`
         is a string in ISO format.
         """
         obj_dict = self.obj.to_dict()
@@ -247,9 +289,11 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save_method_accuracy(self):
         """
-        Test that calling `save()` only updates `updated_at` and not `created_at`.
+        Test that calling `save()` only updates
+        `updated_at` and not `created_at`.
 
-        This test checks that `created_at` remains unchanged after calling `save()`
+        This test checks that `created_at` remains
+        unchanged after calling `save()`
         while `updated_at` is updated to the current time.
         """
         initial_created_at = self.obj.created_at
@@ -261,7 +305,8 @@ class TestBaseModel(unittest.TestCase):
         """
         Test creating an instance of `BaseModel` without `kwargs`.
 
-        This test verifies that an instance created without any arguments still initializes
+        This test verifies that an instance created without
+        any arguments still initializes
         with default `id`, `created_at`, and `updated_at` attributes.
         """
         obj = BaseModel()

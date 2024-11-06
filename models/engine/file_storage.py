@@ -18,7 +18,8 @@ class FileStorage:
         all(): Returns the dictionary of stored objects.
         new(obj): Adds a new object to the storage dictionary.
         save(): Serializes and writes the storage dictionary to a JSON file.
-        reload(): Loads objects from the JSON file back into the storage dictionary.
+        reload(): Loads objects from the JSON file
+        back into the storage dictionary.
     """
 
     __file_path = './file.json'
@@ -41,7 +42,8 @@ class FileStorage:
 
         Args:
             obj (BaseModel): The object to add to storage, expected to have
-                             an `id` attribute and a `to_dict` method for serialization.
+                             an `id` attribute and a `to_dict`
+                             method for serialization.
 
         Side Effects:
             Updates the __objects dictionary by adding a new entry with the
@@ -72,7 +74,8 @@ class FileStorage:
 
         Side Effects:
             Updates the __objects dictionary by adding entries from the file.
-            If the file does not exist or is empty, __objects remains unchanged.
+            If the file does not exist or is empty, __objects
+            remains unchanged.
         """
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
