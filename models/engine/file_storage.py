@@ -48,9 +48,7 @@ class FileStorage:
             key formatted as "ClassName.id" and value as the dictionary
             representation of the object.
         """
-        print(self.__objects)
         self.__objects[f"{type(obj).__name__}.{obj.id}"] = obj.to_dict()
-        print(self.__objects)
 
     def save(self):
         """
