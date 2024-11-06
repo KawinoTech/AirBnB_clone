@@ -25,8 +25,15 @@ class HBNBCommand(cmd.Cmd):
         print("Quit command to exit the program\n")
 
     def do_EOF(self, line):
-        """Handles the EOF (Ctrl+D) signal."""
-        return True  # Returning True exits the command loop when EOF is pressed
+        """Handles End Of File character.
+        """
+        print()
+        return True
+
+    def emptyline(self):
+        """Doesn't do anything on ENTER.
+        """
+        pass
 
 
 if __name__ == "__main__":
