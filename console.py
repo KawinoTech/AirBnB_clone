@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
             attr_names = k.split('.')
             if attr_names[0] == args[0] and attr_names[1] == args[1]:
                 match_attrs = True
-                obj = eval(f"{args[0]}()")
+                obj = eval(f"{args[0]}(**v)")
                 print(obj)
                 break
         if not match_attrs:
@@ -201,8 +201,7 @@ class HBNBCommand(cmd.Cmd):
                                     del all_objs[k]
                                     setattr(obj, args[2],
                                             convert_string(args[3]))
-                                    storage.new(obj)
-                                    storage.save()
+                                    obj.save()
                                     match_id = True
                                     break
                             if not match_id:
