@@ -20,6 +20,7 @@ import cmd
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
+from datetime import datetime
 
 
 class HBNBCommand(cmd.Cmd):
@@ -60,8 +61,10 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 obj = eval(f"{args[0]}()")
+                storage.new(obj)
+                storage.save()
+                print(storage.all())
                 print(obj.id)
-                obj.save()
         else:
             print("** class name missing **")
 
@@ -201,7 +204,9 @@ class HBNBCommand(cmd.Cmd):
                                     del all_objs[k]
                                     setattr(obj, args[2],
                                             convert_string(args[3]))
-                                    obj.save()
+                                    obj.updated_at = datetime.now()
+                                    storage.new(obj)
+                                    storage.save()
                                     match_id = True
                                     break
                             if not match_id:

@@ -81,8 +81,8 @@ class FileStorage:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
                 try:
                     data = json.load(f)
-                except json.decoder.JSONDecodeError:
-                    pass
+                except json.decoder.JSONDecodeError as e:
+                    print("Failed to serialize data-->", e)
                 else:
                     for v in data.values():
                         self.__objects[f"{v['__class__']}.{v['id']}"] = v
