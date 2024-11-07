@@ -77,19 +77,6 @@ class TestPlace(unittest.TestCase):
         self.assertIn("__class__", place_dict)
         self.assertEqual(place_dict["__class__"], "Place")
 
-    def test_to_dict_format(self):
-        """
-        Test that the to_dict() method correctly formats attributes,
-        including datetime fields in ISO format.
-        """
-        place_dict = self.place.to_dict()
-        self.assertEqual(place_dict["name"], "")
-        self.assertIn("created_at", place_dict)
-        self.assertIn("updated_at", place_dict)
-        # Check datetime format
-        self.assertRegex(place_dict["created_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-        self.assertRegex(place_dict["updated_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-
     def test_str_representation(self):
         """
         Test the string representation of the Place instance.

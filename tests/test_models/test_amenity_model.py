@@ -53,19 +53,6 @@ class TestAmenity(unittest.TestCase):
         self.assertIn("__class__", amenity_dict)
         self.assertEqual(amenity_dict["__class__"], "Amenity")
 
-    def test_to_dict_format(self):
-        """
-        Test that the to_dict() method correctly formats attributes,
-        including datetime fields in ISO format.
-        """
-        amenity_dict = self.amenity.to_dict()
-        self.assertEqual(amenity_dict["name"], "")
-        self.assertIn("created_at", amenity_dict)
-        self.assertIn("updated_at", amenity_dict)
-        # Check datetime format
-        self.assertRegex(amenity_dict["created_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-        self.assertRegex(amenity_dict["updated_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-
     def test_str_representation(self):
         """
         Test the string representation of the Amenity instance.

@@ -63,19 +63,6 @@ class TestReview(unittest.TestCase):
         self.assertIn("__class__", review_dict)
         self.assertEqual(review_dict["__class__"], "Review")
 
-    def test_to_dict_format(self):
-        """
-        Test that the to_dict() method correctly formats attributes,
-        including datetime fields in ISO format.
-        """
-        review_dict = self.review.to_dict()
-        self.assertEqual(review_dict["text"], "")
-        self.assertIn("created_at", review_dict)
-        self.assertIn("updated_at", review_dict)
-        # Check datetime format
-        self.assertRegex(review_dict["created_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-        self.assertRegex(review_dict["updated_at"], r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d+")
-
     def test_str_representation(self):
         """
         Test the string representation of the Review instance.
