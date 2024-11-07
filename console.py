@@ -18,13 +18,14 @@ The prompt for the CLI is set to "(hbnb) ".
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """Command-line interpreter for managing BaseModel objects."""
 
-    allowed_classes = ['BaseModel']
+    allowed_classes = ['BaseModel', 'User']
     prompt = "(hbnb) "  # CLI prompt displayed to the user
 
     def do_quit(self, line):
@@ -91,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
             attr_names = k.split('.')
             if attr_names[0] == args[0] and attr_names[1] == args[1]:
                 match_attrs = True
-                obj = BaseModel(**v)
+                obj = eval(f"{args[0]}()")
                 print(obj)
                 break
         if not match_attrs:
