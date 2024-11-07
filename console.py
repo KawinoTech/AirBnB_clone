@@ -19,6 +19,11 @@ The prompt for the CLI is set to "(hbnb) ".
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.review import Review
+from models.place import Place
+from models.amenity import Amenity
 from models import storage
 from datetime import datetime
 
@@ -26,7 +31,9 @@ from datetime import datetime
 class HBNBCommand(cmd.Cmd):
     """Command-line interpreter for managing BaseModel objects."""
 
-    allowed_classes = ['BaseModel', 'User']
+    allowed_classes = ['BaseModel', 'User', 'State',
+                       'City', 'Amenity', 'Review',
+                       'Place']
     prompt = "(hbnb) "  # CLI prompt displayed to the user
 
     def do_quit(self, line):
@@ -63,7 +70,6 @@ class HBNBCommand(cmd.Cmd):
                 obj = eval(f"{args[0]}()")
                 storage.new(obj)
                 storage.save()
-                print(storage.all())
                 print(obj.id)
         else:
             print("** class name missing **")
